@@ -1,6 +1,8 @@
 package data
 
 import (
+	"log"
+
 	"github.com/edmartt/grpc-test/internal/database"
 	"github.com/edmartt/grpc-test/internal/person/models"
 )
@@ -39,4 +41,17 @@ func (u UserDataAccess) Read(id string) (*models.Person, error) {
 	connection.First(&person, "id = ?", id)
 
 	return &person, nil
+}
+
+func (u UserDataAccess) Delete(person *models.Person) (*models.Person, error) {
+	connection, err := dBConnectionObject.GetConnection()
+
+	if err != nil {
+		return nil, err
+	}
+	log.Println("person db: ", person)
+
+	connection.Delete(person)
+
+	return &models.Person{}, nil
 }

@@ -51,9 +51,21 @@ func postPerson(context *gin.Context) {
 	context.JSON(http.StatusOK, created)
 }
 
+func deletePerson(context *gin.Context) {
+	id := context.Param("id")
+	requestPB := &pb.DeletePersonRequest{
+		Id: id,
+	}
+
+	response := client.DeletePerson(requestPB)
+
+	context.JSON(http.StatusOK, response)
+}
+
 func setPersonRoutes(router *gin.RouterGroup) {
 	router.POST("/person", postPerson)
 	router.GET("/person/:id", getPerson)
+	router.DELETE("/person/:id", deletePerson)
 }
 
 func setRouter() *gin.Engine {
