@@ -16,7 +16,8 @@ This small project is a simple CRUD in which gRPC is used to register people's d
 
 ### Running Locally
 
-```git clone https://github.com/Edmartt/grpc-crud.git
+```
+git clone https://github.com/Edmartt/grpc-crud.git
 ```
 
 or ssh instead:
