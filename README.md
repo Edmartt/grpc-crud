@@ -37,7 +37,7 @@ download dependencies
 go mod tidy
 ```
 
-set environment variables following the [.env.example]() file and run
+set environment variables following the [.env.example](https://github.com/Edmartt/grpc-test-server/blob/main/.env.example) file and run
 
 ```
 go run main.go
