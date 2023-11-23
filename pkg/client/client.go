@@ -3,6 +3,7 @@ package client
 import (
 	"context"
 	"fmt"
+	"log"
 
 	pb "github.com/edmartt/grpc-test/internal/person/protos/bin"
 )
@@ -36,6 +37,21 @@ func ReadPerson(request *pb.PersonRequest) *pb.Person {
 	serverResponse, err := serviceClient.Get(context.Background(), request)
 
 	if err != nil {
+		return nil
+	}
+
+	return serverResponse
+}
+
+func DeletePerson(request *pb.DeletePersonRequest) *pb.DeletePersonResponse {
+	connection := grpcConnector()
+
+	serviceClient := pb.NewPersonServiceClient(connection)
+
+	serverResponse, err := serviceClient.Delete(context.Background(), request)
+
+	if err != nil {
+		log.Println("Error Delete", err.Error())
 		return nil
 	}
 
