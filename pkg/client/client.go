@@ -13,10 +13,10 @@ func CreatePerson(person *pb.Person) string {
 	serviceClient := pb.NewPersonServiceClient(connection)
 
 	serverResponse, err := serviceClient.Create(context.Background(), &pb.Person{
-		Id:       person.Id,
-		Name:     person.Name,
-		LastName: person.LastName,
-		Email:    person.Email,
+		Id:        person.Id,
+		FirstName: person.FirstName,
+		LastName:  person.LastName,
+		Email:     person.Email,
 	})
 
 	if err != nil {
@@ -29,7 +29,7 @@ func CreatePerson(person *pb.Person) string {
 	return serverResponse.Response
 }
 
-func ReadPerson(request *pb.PersonRequest) *pb.Person {
+func ReadPerson(request *pb.GetPersonRequest) *pb.GetPersonResponse {
 	connection := grpcConnector()
 
 	serviceClient := pb.NewPersonServiceClient(connection)
