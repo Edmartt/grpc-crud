@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.19.6
-// source: internal/protos/person.proto
+// source: internal/person/protos/person.proto
 
 package bin
 
@@ -22,8 +22,8 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PersonServiceClient interface {
-	Create(ctx context.Context, in *Person, opts ...grpc.CallOption) (*PersonCreatedResponse, error)
-	Get(ctx context.Context, in *PersonRequest, opts ...grpc.CallOption) (*Person, error)
+	Create(ctx context.Context, in *Person, opts ...grpc.CallOption) (*CreatePersonResponse, error)
+	Get(ctx context.Context, in *GetPersonRequest, opts ...grpc.CallOption) (*GetPersonResponse, error)
 	Delete(ctx context.Context, in *DeletePersonRequest, opts ...grpc.CallOption) (*DeletePersonResponse, error)
 }
 
@@ -35,8 +35,8 @@ func NewPersonServiceClient(cc grpc.ClientConnInterface) PersonServiceClient {
 	return &personServiceClient{cc}
 }
 
-func (c *personServiceClient) Create(ctx context.Context, in *Person, opts ...grpc.CallOption) (*PersonCreatedResponse, error) {
-	out := new(PersonCreatedResponse)
+func (c *personServiceClient) Create(ctx context.Context, in *Person, opts ...grpc.CallOption) (*CreatePersonResponse, error) {
+	out := new(CreatePersonResponse)
 	err := c.cc.Invoke(ctx, "/protos.PersonService/Create", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -44,8 +44,8 @@ func (c *personServiceClient) Create(ctx context.Context, in *Person, opts ...gr
 	return out, nil
 }
 
-func (c *personServiceClient) Get(ctx context.Context, in *PersonRequest, opts ...grpc.CallOption) (*Person, error) {
-	out := new(Person)
+func (c *personServiceClient) Get(ctx context.Context, in *GetPersonRequest, opts ...grpc.CallOption) (*GetPersonResponse, error) {
+	out := new(GetPersonResponse)
 	err := c.cc.Invoke(ctx, "/protos.PersonService/Get", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -66,8 +66,8 @@ func (c *personServiceClient) Delete(ctx context.Context, in *DeletePersonReques
 // All implementations must embed UnimplementedPersonServiceServer
 // for forward compatibility
 type PersonServiceServer interface {
-	Create(context.Context, *Person) (*PersonCreatedResponse, error)
-	Get(context.Context, *PersonRequest) (*Person, error)
+	Create(context.Context, *Person) (*CreatePersonResponse, error)
+	Get(context.Context, *GetPersonRequest) (*GetPersonResponse, error)
 	Delete(context.Context, *DeletePersonRequest) (*DeletePersonResponse, error)
 	mustEmbedUnimplementedPersonServiceServer()
 }
@@ -76,10 +76,10 @@ type PersonServiceServer interface {
 type UnimplementedPersonServiceServer struct {
 }
 
-func (UnimplementedPersonServiceServer) Create(context.Context, *Person) (*PersonCreatedResponse, error) {
+func (UnimplementedPersonServiceServer) Create(context.Context, *Person) (*CreatePersonResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedPersonServiceServer) Get(context.Context, *PersonRequest) (*Person, error) {
+func (UnimplementedPersonServiceServer) Get(context.Context, *GetPersonRequest) (*GetPersonResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
 func (UnimplementedPersonServiceServer) Delete(context.Context, *DeletePersonRequest) (*DeletePersonResponse, error) {
@@ -117,7 +117,7 @@ func _PersonService_Create_Handler(srv interface{}, ctx context.Context, dec fun
 }
 
 func _PersonService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PersonRequest)
+	in := new(GetPersonRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -129,7 +129,7 @@ func _PersonService_Get_Handler(srv interface{}, ctx context.Context, dec func(i
 		FullMethod: "/protos.PersonService/Get",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PersonServiceServer).Get(ctx, req.(*PersonRequest))
+		return srv.(PersonServiceServer).Get(ctx, req.(*GetPersonRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -173,5 +173,5 @@ var PersonService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "internal/protos/person.proto",
+	Metadata: "internal/person/protos/person.proto",
 }

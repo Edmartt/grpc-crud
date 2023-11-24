@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.28.1
 // 	protoc        v3.19.6
-// source: internal/protos/person.proto
+// source: internal/person/protos/person.proto
 
 package bin
 
@@ -25,16 +25,16 @@ type Person struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id       string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name     string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	LastName string `protobuf:"bytes,3,opt,name=lastName,proto3" json:"lastName,omitempty"`
-	Email    string `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
+	Id        string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	FirstName string `protobuf:"bytes,2,opt,name=firstName,proto3" json:"firstName,omitempty"`
+	LastName  string `protobuf:"bytes,3,opt,name=lastName,proto3" json:"lastName,omitempty"`
+	Email     string `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
 }
 
 func (x *Person) Reset() {
 	*x = Person{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_internal_protos_person_proto_msgTypes[0]
+		mi := &file_internal_person_protos_person_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -47,7 +47,7 @@ func (x *Person) String() string {
 func (*Person) ProtoMessage() {}
 
 func (x *Person) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_protos_person_proto_msgTypes[0]
+	mi := &file_internal_person_protos_person_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60,7 +60,7 @@ func (x *Person) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Person.ProtoReflect.Descriptor instead.
 func (*Person) Descriptor() ([]byte, []int) {
-	return file_internal_protos_person_proto_rawDescGZIP(), []int{0}
+	return file_internal_person_protos_person_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Person) GetId() string {
@@ -70,9 +70,9 @@ func (x *Person) GetId() string {
 	return ""
 }
 
-func (x *Person) GetName() string {
+func (x *Person) GetFirstName() string {
 	if x != nil {
-		return x.Name
+		return x.FirstName
 	}
 	return ""
 }
@@ -91,7 +91,7 @@ func (x *Person) GetEmail() string {
 	return ""
 }
 
-type PersonCreatedResponse struct {
+type CreatePersonResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -100,23 +100,23 @@ type PersonCreatedResponse struct {
 	Response string `protobuf:"bytes,2,opt,name=response,proto3" json:"response,omitempty"`
 }
 
-func (x *PersonCreatedResponse) Reset() {
-	*x = PersonCreatedResponse{}
+func (x *CreatePersonResponse) Reset() {
+	*x = CreatePersonResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_internal_protos_person_proto_msgTypes[1]
+		mi := &file_internal_person_protos_person_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *PersonCreatedResponse) String() string {
+func (x *CreatePersonResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PersonCreatedResponse) ProtoMessage() {}
+func (*CreatePersonResponse) ProtoMessage() {}
 
-func (x *PersonCreatedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_protos_person_proto_msgTypes[1]
+func (x *CreatePersonResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_person_protos_person_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -127,26 +127,26 @@ func (x *PersonCreatedResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PersonCreatedResponse.ProtoReflect.Descriptor instead.
-func (*PersonCreatedResponse) Descriptor() ([]byte, []int) {
-	return file_internal_protos_person_proto_rawDescGZIP(), []int{1}
+// Deprecated: Use CreatePersonResponse.ProtoReflect.Descriptor instead.
+func (*CreatePersonResponse) Descriptor() ([]byte, []int) {
+	return file_internal_person_protos_person_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *PersonCreatedResponse) GetId() string {
+func (x *CreatePersonResponse) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-func (x *PersonCreatedResponse) GetResponse() string {
+func (x *CreatePersonResponse) GetResponse() string {
 	if x != nil {
 		return x.Response
 	}
 	return ""
 }
 
-type PersonRequest struct {
+type GetPersonRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -154,23 +154,23 @@ type PersonRequest struct {
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 }
 
-func (x *PersonRequest) Reset() {
-	*x = PersonRequest{}
+func (x *GetPersonRequest) Reset() {
+	*x = GetPersonRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_internal_protos_person_proto_msgTypes[2]
+		mi := &file_internal_person_protos_person_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *PersonRequest) String() string {
+func (x *GetPersonRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PersonRequest) ProtoMessage() {}
+func (*GetPersonRequest) ProtoMessage() {}
 
-func (x *PersonRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_protos_person_proto_msgTypes[2]
+func (x *GetPersonRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_person_protos_person_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -181,16 +181,63 @@ func (x *PersonRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PersonRequest.ProtoReflect.Descriptor instead.
-func (*PersonRequest) Descriptor() ([]byte, []int) {
-	return file_internal_protos_person_proto_rawDescGZIP(), []int{2}
+// Deprecated: Use GetPersonRequest.ProtoReflect.Descriptor instead.
+func (*GetPersonRequest) Descriptor() ([]byte, []int) {
+	return file_internal_person_protos_person_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *PersonRequest) GetId() string {
+func (x *GetPersonRequest) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
+}
+
+type GetPersonResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Person *Person `protobuf:"bytes,1,opt,name=person,proto3" json:"person,omitempty"`
+}
+
+func (x *GetPersonResponse) Reset() {
+	*x = GetPersonResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_internal_person_protos_person_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetPersonResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPersonResponse) ProtoMessage() {}
+
+func (x *GetPersonResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_person_protos_person_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPersonResponse.ProtoReflect.Descriptor instead.
+func (*GetPersonResponse) Descriptor() ([]byte, []int) {
+	return file_internal_person_protos_person_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetPersonResponse) GetPerson() *Person {
+	if x != nil {
+		return x.Person
+	}
+	return nil
 }
 
 type DeletePersonRequest struct {
@@ -204,7 +251,7 @@ type DeletePersonRequest struct {
 func (x *DeletePersonRequest) Reset() {
 	*x = DeletePersonRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_internal_protos_person_proto_msgTypes[3]
+		mi := &file_internal_person_protos_person_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -217,7 +264,7 @@ func (x *DeletePersonRequest) String() string {
 func (*DeletePersonRequest) ProtoMessage() {}
 
 func (x *DeletePersonRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_protos_person_proto_msgTypes[3]
+	mi := &file_internal_person_protos_person_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -230,7 +277,7 @@ func (x *DeletePersonRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeletePersonRequest.ProtoReflect.Descriptor instead.
 func (*DeletePersonRequest) Descriptor() ([]byte, []int) {
-	return file_internal_protos_person_proto_rawDescGZIP(), []int{3}
+	return file_internal_person_protos_person_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *DeletePersonRequest) GetId() string {
@@ -252,7 +299,7 @@ type DeletePersonResponse struct {
 func (x *DeletePersonResponse) Reset() {
 	*x = DeletePersonResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_internal_protos_person_proto_msgTypes[4]
+		mi := &file_internal_person_protos_person_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -265,7 +312,7 @@ func (x *DeletePersonResponse) String() string {
 func (*DeletePersonResponse) ProtoMessage() {}
 
 func (x *DeletePersonResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_protos_person_proto_msgTypes[4]
+	mi := &file_internal_person_protos_person_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -278,7 +325,7 @@ func (x *DeletePersonResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeletePersonResponse.ProtoReflect.Descriptor instead.
 func (*DeletePersonResponse) Descriptor() ([]byte, []int) {
-	return file_internal_protos_person_proto_rawDescGZIP(), []int{4}
+	return file_internal_person_protos_person_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *DeletePersonResponse) GetId() string {
@@ -295,87 +342,95 @@ func (x *DeletePersonResponse) GetStatus() string {
 	return ""
 }
 
-var File_internal_protos_person_proto protoreflect.FileDescriptor
+var File_internal_person_protos_person_proto protoreflect.FileDescriptor
 
-var file_internal_protos_person_proto_rawDesc = []byte{
-	0x0a, 0x1c, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x73, 0x2f, 0x70, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x22, 0x5e, 0x0a, 0x06, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e,
-	0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64,
-	0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
-	0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x6c, 0x61, 0x73, 0x74, 0x4e, 0x61, 0x6d, 0x65,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6c, 0x61, 0x73, 0x74, 0x4e, 0x61, 0x6d, 0x65,
-	0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x22, 0x43, 0x0a, 0x15, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e,
-	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+var file_internal_person_protos_person_proto_rawDesc = []byte{
+	0x0a, 0x23, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x2f, 0x70, 0x65, 0x72, 0x73, 0x6f,
+	0x6e, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2f, 0x70, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x22, 0x68, 0x0a,
+	0x06, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x66, 0x69, 0x72, 0x73, 0x74,
+	0x4e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x66, 0x69, 0x72, 0x73,
+	0x74, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x6c, 0x61, 0x73, 0x74, 0x4e, 0x61, 0x6d,
+	0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6c, 0x61, 0x73, 0x74, 0x4e, 0x61, 0x6d,
+	0x65, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x22, 0x42, 0x0a, 0x14, 0x43, 0x72, 0x65, 0x61, 0x74,
+	0x65, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
 	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12,
 	0x1a, 0x0a, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x1f, 0x0a, 0x0d, 0x50,
-	0x65, 0x72, 0x73, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02,
-	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x25, 0x0a, 0x13,
+	0x09, 0x52, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x22, 0x0a, 0x10, 0x47,
+	0x65, 0x74, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
+	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22,
+	0x3b, 0x0a, 0x11, 0x47, 0x65, 0x74, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x26, 0x0a, 0x06, 0x70, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x50, 0x65,
+	0x72, 0x73, 0x6f, 0x6e, 0x52, 0x06, 0x70, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x22, 0x25, 0x0a, 0x13,
 	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75,
 	0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x02, 0x69, 0x64, 0x22, 0x3e, 0x0a, 0x14, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x65, 0x72,
 	0x73, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69,
 	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x73,
 	0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61,
-	0x74, 0x75, 0x73, 0x32, 0xc1, 0x01, 0x0a, 0x0d, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x53, 0x65,
-	0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x39, 0x0a, 0x06, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x12,
+	0x74, 0x75, 0x73, 0x32, 0xce, 0x01, 0x0a, 0x0d, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x53, 0x65,
+	0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x38, 0x0a, 0x06, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x12,
 	0x0e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x1a,
-	0x1d, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x43,
-	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00,
-	0x12, 0x2e, 0x0a, 0x03, 0x47, 0x65, 0x74, 0x12, 0x15, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73,
-	0x2e, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0e,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x22, 0x00,
-	0x12, 0x45, 0x0a, 0x06, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x12, 0x1b, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x73, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73,
-	0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x0f, 0x5a, 0x0d, 0x2e, 0x2e, 0x2f, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x73, 0x2f, 0x62, 0x69, 0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x1c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x50,
+	0x65, 0x72, 0x73, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12,
+	0x3c, 0x0a, 0x03, 0x47, 0x65, 0x74, 0x12, 0x18, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e,
+	0x47, 0x65, 0x74, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x19, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x47, 0x65, 0x74, 0x50, 0x65, 0x72,
+	0x73, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x45, 0x0a,
+	0x06, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x12, 0x1b, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73,
+	0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x1c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x44, 0x65,
+	0x6c, 0x65, 0x74, 0x65, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x22, 0x00, 0x42, 0x0f, 0x5a, 0x0d, 0x2e, 0x2e, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x73, 0x2f, 0x62, 0x69, 0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
-	file_internal_protos_person_proto_rawDescOnce sync.Once
-	file_internal_protos_person_proto_rawDescData = file_internal_protos_person_proto_rawDesc
+	file_internal_person_protos_person_proto_rawDescOnce sync.Once
+	file_internal_person_protos_person_proto_rawDescData = file_internal_person_protos_person_proto_rawDesc
 )
 
-func file_internal_protos_person_proto_rawDescGZIP() []byte {
-	file_internal_protos_person_proto_rawDescOnce.Do(func() {
-		file_internal_protos_person_proto_rawDescData = protoimpl.X.CompressGZIP(file_internal_protos_person_proto_rawDescData)
+func file_internal_person_protos_person_proto_rawDescGZIP() []byte {
+	file_internal_person_protos_person_proto_rawDescOnce.Do(func() {
+		file_internal_person_protos_person_proto_rawDescData = protoimpl.X.CompressGZIP(file_internal_person_protos_person_proto_rawDescData)
 	})
-	return file_internal_protos_person_proto_rawDescData
+	return file_internal_person_protos_person_proto_rawDescData
 }
 
-var file_internal_protos_person_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
-var file_internal_protos_person_proto_goTypes = []interface{}{
-	(*Person)(nil),                // 0: protos.Person
-	(*PersonCreatedResponse)(nil), // 1: protos.PersonCreatedResponse
-	(*PersonRequest)(nil),         // 2: protos.PersonRequest
-	(*DeletePersonRequest)(nil),   // 3: protos.DeletePersonRequest
-	(*DeletePersonResponse)(nil),  // 4: protos.DeletePersonResponse
+var file_internal_person_protos_person_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_internal_person_protos_person_proto_goTypes = []interface{}{
+	(*Person)(nil),               // 0: protos.Person
+	(*CreatePersonResponse)(nil), // 1: protos.CreatePersonResponse
+	(*GetPersonRequest)(nil),     // 2: protos.GetPersonRequest
+	(*GetPersonResponse)(nil),    // 3: protos.GetPersonResponse
+	(*DeletePersonRequest)(nil),  // 4: protos.DeletePersonRequest
+	(*DeletePersonResponse)(nil), // 5: protos.DeletePersonResponse
 }
-var file_internal_protos_person_proto_depIdxs = []int32{
-	0, // 0: protos.PersonService.Create:input_type -> protos.Person
-	2, // 1: protos.PersonService.Get:input_type -> protos.PersonRequest
-	3, // 2: protos.PersonService.Delete:input_type -> protos.DeletePersonRequest
-	1, // 3: protos.PersonService.Create:output_type -> protos.PersonCreatedResponse
-	0, // 4: protos.PersonService.Get:output_type -> protos.Person
-	4, // 5: protos.PersonService.Delete:output_type -> protos.DeletePersonResponse
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+var file_internal_person_protos_person_proto_depIdxs = []int32{
+	0, // 0: protos.GetPersonResponse.person:type_name -> protos.Person
+	0, // 1: protos.PersonService.Create:input_type -> protos.Person
+	2, // 2: protos.PersonService.Get:input_type -> protos.GetPersonRequest
+	4, // 3: protos.PersonService.Delete:input_type -> protos.DeletePersonRequest
+	1, // 4: protos.PersonService.Create:output_type -> protos.CreatePersonResponse
+	3, // 5: protos.PersonService.Get:output_type -> protos.GetPersonResponse
+	5, // 6: protos.PersonService.Delete:output_type -> protos.DeletePersonResponse
+	4, // [4:7] is the sub-list for method output_type
+	1, // [1:4] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
-func init() { file_internal_protos_person_proto_init() }
-func file_internal_protos_person_proto_init() {
-	if File_internal_protos_person_proto != nil {
+func init() { file_internal_person_protos_person_proto_init() }
+func file_internal_person_protos_person_proto_init() {
+	if File_internal_person_protos_person_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_internal_protos_person_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_internal_person_protos_person_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Person); i {
 			case 0:
 				return &v.state
@@ -387,8 +442,8 @@ func file_internal_protos_person_proto_init() {
 				return nil
 			}
 		}
-		file_internal_protos_person_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PersonCreatedResponse); i {
+		file_internal_person_protos_person_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreatePersonResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -399,8 +454,8 @@ func file_internal_protos_person_proto_init() {
 				return nil
 			}
 		}
-		file_internal_protos_person_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PersonRequest); i {
+		file_internal_person_protos_person_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetPersonRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -411,7 +466,19 @@ func file_internal_protos_person_proto_init() {
 				return nil
 			}
 		}
-		file_internal_protos_person_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_internal_person_protos_person_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetPersonResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_internal_person_protos_person_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeletePersonRequest); i {
 			case 0:
 				return &v.state
@@ -423,7 +490,7 @@ func file_internal_protos_person_proto_init() {
 				return nil
 			}
 		}
-		file_internal_protos_person_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+		file_internal_person_protos_person_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeletePersonResponse); i {
 			case 0:
 				return &v.state
@@ -440,18 +507,18 @@ func file_internal_protos_person_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_internal_protos_person_proto_rawDesc,
+			RawDescriptor: file_internal_person_protos_person_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_internal_protos_person_proto_goTypes,
-		DependencyIndexes: file_internal_protos_person_proto_depIdxs,
-		MessageInfos:      file_internal_protos_person_proto_msgTypes,
+		GoTypes:           file_internal_person_protos_person_proto_goTypes,
+		DependencyIndexes: file_internal_person_protos_person_proto_depIdxs,
+		MessageInfos:      file_internal_person_protos_person_proto_msgTypes,
 	}.Build()
-	File_internal_protos_person_proto = out.File
-	file_internal_protos_person_proto_rawDesc = nil
-	file_internal_protos_person_proto_goTypes = nil
-	file_internal_protos_person_proto_depIdxs = nil
+	File_internal_person_protos_person_proto = out.File
+	file_internal_person_protos_person_proto_rawDesc = nil
+	file_internal_person_protos_person_proto_goTypes = nil
+	file_internal_person_protos_person_proto_depIdxs = nil
 }
