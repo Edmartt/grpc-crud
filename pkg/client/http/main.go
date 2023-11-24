@@ -18,7 +18,7 @@ type createdResponse struct {
 func getPerson(context *gin.Context) {
 	id := context.Param("id")
 
-	requestPB := &pb.PersonRequest{
+	requestPB := &pb.GetPersonRequest{
 		Id: id,
 	}
 
@@ -34,7 +34,7 @@ func postPerson(context *gin.Context) {
 
 	err := context.BindJSON(&personModel)
 
-	personProtoModel.Name = personModel.FirstName
+	personProtoModel.FirstName = personModel.FirstName
 	personProtoModel.LastName = personModel.LastName
 	personProtoModel.Email = personModel.Email
 

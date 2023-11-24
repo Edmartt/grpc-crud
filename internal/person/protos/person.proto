@@ -9,13 +9,17 @@ message Person{
   string email = 4;
 }
 
-message PersonCreatedResponse{
+message CreatePersonResponse{
   string id = 1;
   string response = 2;
 }
 
-message PersonRequest{
+message GetPersonRequest{
   string id = 1;
+}
+
+message GetPersonResponse{
+  Person person = 1;
 }
 
 message DeletePersonRequest{
@@ -29,7 +33,7 @@ message DeletePersonResponse{
 
 service PersonService{
 
-  rpc Create(Person) returns (PersonCreatedResponse) {}
-  rpc Get(PersonRequest) returns (Person) {}
+  rpc Create(Person) returns (CreatePersonResponse) {}
+  rpc Get(GetPersonRequest) returns (GetPersonResponse) {}
   rpc Delete(DeletePersonRequest) returns (DeletePersonResponse) {}
 }
