@@ -133,6 +133,7 @@ func setPersonRoutes(router *gin.RouterGroup) {
 	router.POST("/person", postPerson)
 	router.GET("/person/:id", getPerson)
 	router.DELETE("/person/:id", deletePerson)
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 }
 
 func setRouter() *gin.Engine {
