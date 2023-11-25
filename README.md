@@ -54,4 +54,4 @@ go run pkg/client/http/main.go
 
 #### Note
 
-You can check api docs in: [api docs](<host:8080>/api/v1/swagger/index.html)
+You can check api docs in: [api docs](http://localhost:8080/api/v1/swagger/index.html)
