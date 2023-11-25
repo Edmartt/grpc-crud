@@ -2,7 +2,6 @@ package client
 
 import (
 	"context"
-	"fmt"
 	"log"
 
 	pb "github.com/edmartt/grpc-test/internal/person/protos/bin"
@@ -23,7 +22,7 @@ func CreatePerson(person *pb.Person) string {
 		return err.Error()
 	}
 
-	response := fmt.Sprintf("Person with %s id created", serverResponse.Id)
+	response := serverResponse.Id
 	serverResponse.Response = response
 
 	return serverResponse.Response
