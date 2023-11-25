@@ -39,12 +39,25 @@ type httpResponse struct {
 func getPerson(context *gin.Context) {
 	id := context.Param("id")
 
+	badReq := httpResponse{
+		Response: "ID empty",
+	}
+
+	if id == "" {
+		context.JSON(http.StatusBadRequest, badReq)
+	}
+
 	requestPB := &pb.GetPersonRequest{
 		Id: id,
 	}
 
 	response := client.ReadPerson(requestPB)
-	log.Println("response client grpc: ", response)
+
+	if response.Person.Id == "" {
+		context.JSON(http.StatusNotFound, httpResponse{
+			Response: "Not found",
+		})
+	}
 
 	context.JSON(http.StatusOK, response)
 }
@@ -75,7 +88,7 @@ func postPerson(context *gin.Context) {
 	}
 
 	response := client.CreatePerson(personProtoModel)
-	created := createdResponse{
+	created := httpResponse{
 		Response: response,
 	}
 
@@ -99,7 +112,19 @@ func deletePerson(context *gin.Context) {
 		Id: id,
 	}
 
+	if id == "" {
+		context.JSON(http.StatusBadRequest, httpResponse{
+			Response: "ID is missing",
+		})
+	}
+
 	response := client.DeletePerson(requestPB)
+
+	if response.Id == "" {
+		context.JSON(http.StatusNotFound, httpResponse{
+			Response: "Not found",
+		})
+	}
 
 	context.JSON(http.StatusOK, response)
 }
