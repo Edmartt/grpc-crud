@@ -1,0 +1,113 @@
+basePath: /api/v1
+definitions:
+  main.httpResponse:
+    description: This client handles data for sending data to gRPC client and after
+      that to gRPC server
+    properties:
+      response:
+        type: string
+    type: object
+  models.Person:
+    properties:
+      email:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: string
+      last_name:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This client handles data for sending data to gRPC client and after
+    that to gRPC server
+  termsOfService: http://swagger.io/terms/
+  title: HTTP Client for gRPC Client
+  version: "1.0"
+paths:
+  /person:
+    post:
+      consumes:
+      - application/json
+      description: This endpoint is for creating persons
+      parameters:
+      - description: Creates person
+        in: body
+        name: person
+        required: true
+        schema:
+          $ref: '#/definitions/models.Person'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.httpResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.httpResponse'
+      summary: Creates new person
+      tags:
+      - Persons
+  /person/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: This endpoint is for deleting person by ID
+      parameters:
+      - description: uuid formatted ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.httpResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.httpResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/main.httpResponse'
+      summary: Deletes person by ID
+      tags:
+      - Persons
+    get:
+      consumes:
+      - application/json
+      description: Through a get request the id is sent to gRPC client
+      parameters:
+      - description: Person ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Person'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.httpResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/main.httpResponse'
+      summary: Get persons from DB
+      tags:
+      - Persons
+swagger: "2.0"
