@@ -51,7 +51,11 @@ func getPerson(context *gin.Context) {
 		Id: id,
 	}
 
-	response := client.ReadPerson(requestPB)
+	response, err := client.ReadPerson(requestPB)
+
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, err)
+	}
 
 	if response.Person.Id == "" {
 		context.JSON(http.StatusNotFound, httpResponse{
@@ -87,7 +91,12 @@ func postPerson(context *gin.Context) {
 		return
 	}
 
-	response := client.CreatePerson(personProtoModel)
+	response, err := client.CreatePerson(personProtoModel)
+
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, err)
+	}
+
 	created := httpResponse{
 		Response: response,
 	}
@@ -116,14 +125,21 @@ func deletePerson(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, httpResponse{
 			Response: "ID is missing",
 		})
+		return
 	}
 
-	response := client.DeletePerson(requestPB)
+	response, err := client.DeletePerson(requestPB)
 
-	if response.Id == "" {
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, err)
+		return
+	}
+
+	if response.Status == "not found" {
 		context.JSON(http.StatusNotFound, httpResponse{
 			Response: "Not found",
 		})
+		return
 	}
 
 	context.JSON(http.StatusOK, response)
