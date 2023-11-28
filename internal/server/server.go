@@ -18,10 +18,11 @@ func StartServer() {
 
 	if err != nil {
 		log.Println("TCP ERROR" + err.Error())
+		panic(err)
 	}
 
 	serve := grpc.NewServer()
-	fmt.Println("SERVER RUNNING")
+	fmt.Println("SERVER RUNNING on: ", port)
 
 	pb.RegisterPersonServiceServer(serve, &person.Service{})
 

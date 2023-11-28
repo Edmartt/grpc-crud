@@ -1,8 +1,6 @@
 package data
 
 import (
-	"log"
-
 	"github.com/edmartt/grpc-test/internal/database"
 	"github.com/edmartt/grpc-test/internal/person/models"
 )
@@ -49,7 +47,6 @@ func (u UserDataAccess) Delete(person *models.Person) (*models.Person, error) {
 	if err != nil {
 		return nil, err
 	}
-	log.Println("person db: ", person)
 
 	connection.Delete(person)
 
