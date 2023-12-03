@@ -44,13 +44,7 @@ set environment variables following the [.env.example](https://github.com/Edmart
 go run main.go
 ```
 
-The command above will run the server-side code
-
-Now you will need to run this next command for the http client:
-
-```
-go run pkg/client/http/main.go
-```
+because concurrency was added for http server, now just with the above command is enough for running the whole project
 
 #### Note
 
