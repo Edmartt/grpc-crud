@@ -1,4 +1,4 @@
-package main
+package http
 
 import (
 	"net/http"
@@ -7,7 +7,6 @@ import (
 	pb "github.com/edmartt/grpc-test/internal/person/protos/bin"
 	"github.com/edmartt/grpc-test/pkg/client"
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 
@@ -61,6 +60,7 @@ func getPerson(context *gin.Context) {
 		context.JSON(http.StatusNotFound, httpResponse{
 			Response: "Not found",
 		})
+		return
 	}
 
 	context.JSON(http.StatusOK, response)
@@ -160,12 +160,7 @@ func setRouter() *gin.Engine {
 	return router
 }
 
-func start(port string) {
+func Start(port string) {
 	router := setRouter()
 	router.Run(":" + port)
-}
-
-func main() {
-	godotenv.Load()
-	start("8080")
 }
