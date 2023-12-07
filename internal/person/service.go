@@ -9,10 +9,10 @@ import (
 	"github.com/google/uuid"
 )
 
-var dataAccess data.IUserDataAccess
+var DataAccess data.IUserDataAccess
 
 func init() {
-	dataAccess = data.UserDataAccess{}
+	DataAccess = data.UserDataAccess{}
 }
 
 type Service struct {
@@ -29,14 +29,14 @@ func (s *Service) Create(ctx context.Context, person *pb.Person) (*pb.CreatePers
 		Email:     person.Email,
 	}
 
-	status := dataAccess.Create(*newPerson)
+	status := DataAccess.Create(*newPerson)
 
 	return &pb.CreatePersonResponse{Id: newPerson.ID, Response: status}, nil
 }
 
 func (s *Service) Get(ctx context.Context, request *pb.GetPersonRequest) (*pb.GetPersonResponse, error) {
 	id := request.Id
-	dbResponse, err := dataAccess.Read(id)
+	dbResponse, err := DataAccess.Read(id)
 
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func (s *Service) Get(ctx context.Context, request *pb.GetPersonRequest) (*pb.Ge
 
 func (s *Service) Delete(ctx context.Context, request *pb.DeletePersonRequest) (*pb.DeletePersonResponse, error) {
 	id := request.Id
-	queryPerson, err := dataAccess.Read(id)
+	queryPerson, err := DataAccess.Read(id)
 
 	if err != nil {
 		return nil, err
@@ -69,7 +69,7 @@ func (s *Service) Delete(ctx context.Context, request *pb.DeletePersonRequest) (
 		}, nil
 	}
 
-	dataAccess.Delete(queryPerson)
+	DataAccess.Delete(queryPerson)
 
 	delPersonResponse := &pb.DeletePersonResponse{
 		Id:     queryPerson.ID,
