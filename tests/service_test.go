@@ -71,3 +71,49 @@ func TestGetGRPC(t *testing.T) {
 	}
 
 }
+
+func TestDeleteGRPC(t *testing.T) {
+	service := person.Service{}
+
+	request := &pb.DeletePersonRequest{
+		Id: "1",
+	}
+	expectedResponse := &pb.DeletePersonResponse{
+		Id:     "1",
+		Status: "deleted",
+	}
+
+	resultDelete, err := service.Delete(context.Background(), request)
+
+	if err != nil {
+		t.Errorf("got %s", err)
+	}
+
+	if resultDelete.Status != expectedResponse.Status {
+		t.Errorf("expected %s and got %s", expectedResponse.Status, resultDelete.Status)
+	}
+}
+
+func TestNotFoundBeforeDelete(t *testing.T) {
+	service := person.Service{}
+
+	requestFilled := &pb.DeletePersonRequest{
+		Id: "2",
+	}
+
+	expectedResponse := &pb.DeletePersonResponse{
+		Id:     requestFilled.Id,
+		Status: "not found",
+	}
+
+	resultNotFound, err := service.Delete(context.Background(), requestFilled)
+
+	if err != nil {
+		t.Errorf("got %s", err)
+	}
+
+	if resultNotFound.Status != expectedResponse.Status {
+		t.Errorf("expected %s and got %s", expectedResponse.Status, resultNotFound)
+	}
+
+}
