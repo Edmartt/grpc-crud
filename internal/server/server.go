@@ -14,7 +14,7 @@ import (
 func StartServer() {
 	port := os.Getenv("PORT")
 
-	listener, err := net.Listen("tcp", port)
+	listener, err := net.Listen("tcp", ":"+port)
 
 	if err != nil {
 		log.Println("TCP ERROR" + err.Error())
