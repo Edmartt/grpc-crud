@@ -10,6 +10,11 @@ func (m mockDataAccess) Create(person models.Person) string {
 }
 
 func (m mockDataAccess) Read(id string) (*models.Person, error) {
+	if id == "2" {
+		return &models.Person{
+			ID: "",
+		}, nil
+	}
 	return &models.Person{
 		ID:        "1",
 		FirstName: "ed",
