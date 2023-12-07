@@ -7,22 +7,15 @@ import (
 	pb "github.com/edmartt/grpc-test/internal/person/protos/bin"
 	"github.com/edmartt/grpc-test/pkg/client"
 	"github.com/gin-gonic/gin"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
-
-	_ "github.com/edmartt/grpc-test/docs"
 )
 
 //	@title			HTTP Client for gRPC Client
 //	@version		1.0
 //	@description	This client handles data for sending data to gRPC client and after that to gRPC server
 //	@termsOfService	http://swagger.io/terms/
-//
+
 // @host		localhost:8080
 // @BasePath	/api/v1
-type httpResponse struct {
-	Response string `json:"response"`
-}
 
 // getPerson godoc
 // @Summary      Get persons from DB
@@ -143,24 +136,4 @@ func deletePerson(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, response)
-}
-
-func setPersonRoutes(router *gin.RouterGroup) {
-	router.POST("/person", postPerson)
-	router.GET("/person/:id", getPerson)
-	router.DELETE("/person/:id", deletePerson)
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-}
-
-func setRouter() *gin.Engine {
-	router := gin.Default()
-	apiGroup := router.Group("/api/v1")
-	setPersonRoutes(apiGroup)
-
-	return router
-}
-
-func Start(port string) {
-	router := setRouter()
-	router.Run(":" + port)
 }
