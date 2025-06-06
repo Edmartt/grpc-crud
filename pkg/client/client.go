@@ -2,6 +2,7 @@ package client
 
 import (
 	"context"
+	"log"
 
 	pb "github.com/edmartt/grpc-test/internal/person/protos/bin"
 )
@@ -37,14 +38,18 @@ func ReadPerson(request *pb.GetPersonRequest) (*pb.GetPersonResponse, error) {
 	if err != nil {
 		return nil, err
 	}
+	log.Println("after grpc connection")
 
 	serviceClient := pb.NewPersonServiceClient(connection)
 
 	serverResponse, err := serviceClient.Get(context.Background(), request)
 
 	if err != nil {
+		log.Println("error service log: ", err.Error())
 		return nil, err
 	}
+
+	log.Println("after grpc service response")
 
 	return serverResponse, nil
 }
