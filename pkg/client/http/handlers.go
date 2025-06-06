@@ -1,6 +1,7 @@
 package http
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/edmartt/grpc-test/internal/person/models"
@@ -35,8 +36,10 @@ func getPerson(context *gin.Context) {
 		Response: "ID empty",
 	}
 
+	log.Println("before checking json for <BR")
 	if id == "" {
 		context.JSON(http.StatusBadRequest, badReq)
+		return
 	}
 
 	requestPB := &pb.GetPersonRequest{
@@ -45,9 +48,13 @@ func getPerson(context *gin.Context) {
 
 	response, err := client.ReadPerson(requestPB)
 
+	log.Println("before checking json for 500")
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, err)
+		return
 	}
+
+	log.Println("after checking json for 500")
 
 	if response.Person.Id == "" {
 		context.JSON(http.StatusNotFound, httpResponse{
@@ -70,10 +77,10 @@ func getPerson(context *gin.Context) {
 // @Failure	 400 {object}  httpResponse
 // @Router       /person [post]
 func postPerson(context *gin.Context) {
-	personModel := models.Person{}
+	personModel := &models.Person{}
 	personProtoModel := &pb.Person{}
 
-	err := context.BindJSON(&personModel)
+	err := context.BindJSON(personModel)
 
 	personProtoModel.FirstName = personModel.FirstName
 	personProtoModel.LastName = personModel.LastName
@@ -88,6 +95,7 @@ func postPerson(context *gin.Context) {
 
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, err)
+		return
 	}
 
 	created := httpResponse{
