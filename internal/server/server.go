@@ -4,20 +4,17 @@ import (
 	"fmt"
 	"log"
 	"net"
-	"os"
 
 	"github.com/edmartt/grpc-test/internal/person"
 	pb "github.com/edmartt/grpc-test/internal/person/protos/bin"
 	"google.golang.org/grpc"
 )
 
-func StartServer() {
-	port := os.Getenv("PORT")
+func StartServer(port string) {
 
 	listener, err := net.Listen("tcp", ":"+port)
 
 	if err != nil {
-		log.Println("TCP ERROR" + err.Error())
 		panic(err)
 	}
 

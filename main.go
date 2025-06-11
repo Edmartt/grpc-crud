@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"os"
 
 	"github.com/edmartt/grpc-test/internal/database"
@@ -10,11 +11,16 @@ import (
 )
 
 func main() {
-	godotenv.Load()
+	err := godotenv.Load()
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	port := os.Getenv("HTTP_PORT")
+	grpcPort := os.Getenv("PORT")
 	go http.Start(port)
 
 	database.InitMigrations()
-	server.StartServer()
+	server.StartServer(grpcPort)
 }
