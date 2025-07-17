@@ -6,17 +6,21 @@ import (
 	"github.com/edmartt/grpc-test/internal/person/data"
 	"github.com/edmartt/grpc-test/internal/person/models"
 	pb "github.com/edmartt/grpc-test/internal/person/protos/bin"
+	"github.com/edmartt/grpc-test/internal/utils"
 	"github.com/google/uuid"
 )
 
 var DataAccess data.IUserDataAccess
 
 func init() {
-	DataAccess = data.UserDataAccess{}
+	DataAccess = data.UserDataAccess{
+		ZLogger: utils.NewZeroLoggerAdapter(),
+	}
 }
 
 type Service struct {
 	pb.UnimplementedPersonServiceServer
+	ZLogger utils.ILogger
 }
 
 func (s *Service) Create(ctx context.Context, person *pb.Person) (*pb.CreatePersonResponse, error) {
@@ -31,6 +35,8 @@ func (s *Service) Create(ctx context.Context, person *pb.Person) (*pb.CreatePers
 
 	status := DataAccess.Create(*newPerson)
 
+	s.ZLogger.Info("new person created")
+
 	return &pb.CreatePersonResponse{Id: newPerson.ID, Response: status}, nil
 }
 
@@ -39,6 +45,7 @@ func (s *Service) Get(ctx context.Context, request *pb.GetPersonRequest) (*pb.Ge
 	dbResponse, err := DataAccess.Read(id)
 
 	if err != nil {
+		s.ZLogger.Error("data accesss error")
 		return nil, err
 	}
 
@@ -59,17 +66,23 @@ func (s *Service) Delete(ctx context.Context, request *pb.DeletePersonRequest) (
 	queryPerson, err := DataAccess.Read(id)
 
 	if err != nil {
+		s.ZLogger.Error("data access error")
 		return nil, err
 	}
 
 	if queryPerson.ID == "" {
+		s.ZLogger.Debug("ID empty")
 		return &pb.DeletePersonResponse{
 			Id:     id,
 			Status: "not found",
 		}, nil
 	}
 
-	DataAccess.Delete(queryPerson)
+	_, err = DataAccess.Delete(queryPerson)
+
+	if err != nil {
+		s.ZLogger.Error("error deleting person")
+	}
 
 	delPersonResponse := &pb.DeletePersonResponse{
 		Id:     queryPerson.ID,
@@ -77,5 +90,4 @@ func (s *Service) Delete(ctx context.Context, request *pb.DeletePersonRequest) (
 	}
 
 	return delPersonResponse, nil
-
 }

@@ -1,29 +1,42 @@
 package database
 
 import (
-	"log"
-
 	"github.com/edmartt/grpc-test/internal/person/models"
+	"github.com/edmartt/grpc-test/internal/utils"
 )
 
 type Migrations struct {
-	DB IConnection
+	DB      IConnection
+	ZLogger utils.ILogger
 }
 
 func (m Migrations) MigrateData() {
+	m.ZLogger.Info("trying DB connection")
+
 	connection, conErr := m.DB.GetConnection()
 
 	if conErr != nil {
-		log.Println("Connection Error Migrations: ", conErr.Error())
+		m.ZLogger.Fatal(conErr.Error())
 	}
 
-	connection.AutoMigrate(&models.Person{})
+	err := connection.AutoMigrate(&models.Person{})
+
+	if err != nil {
+		m.ZLogger.Error(err.Error())
+	}
+
 }
 
 func InitMigrations() {
+
+	db := NewSQLiteDB()
+
 	migrations := Migrations{
-		DB: SQLiteDB{},
+		DB:      db,
+		ZLogger: db.ZLogger,
 	}
+
+	db.ZLogger.Trace("migrations initialized")
 
 	migrations.MigrateData()
 }
