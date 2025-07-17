@@ -37,6 +37,7 @@ func getPerson(context *gin.Context) {
 
 	if id == "" {
 		context.JSON(http.StatusBadRequest, badReq)
+		return
 	}
 
 	requestPB := &pb.GetPersonRequest{
@@ -47,6 +48,7 @@ func getPerson(context *gin.Context) {
 
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, err)
+		return
 	}
 
 	if response.Person.Id == "" {
@@ -70,10 +72,10 @@ func getPerson(context *gin.Context) {
 // @Failure	 400 {object}  httpResponse
 // @Router       /person [post]
 func postPerson(context *gin.Context) {
-	personModel := models.Person{}
+	personModel := &models.Person{}
 	personProtoModel := &pb.Person{}
 
-	err := context.BindJSON(&personModel)
+	err := context.BindJSON(personModel)
 
 	personProtoModel.FirstName = personModel.FirstName
 	personProtoModel.LastName = personModel.LastName
@@ -88,6 +90,7 @@ func postPerson(context *gin.Context) {
 
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, err)
+		return
 	}
 
 	created := httpResponse{
