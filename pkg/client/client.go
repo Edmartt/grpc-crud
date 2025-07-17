@@ -2,15 +2,18 @@ package client
 
 import (
 	"context"
-	"log"
 
 	pb "github.com/edmartt/grpc-test/internal/person/protos/bin"
+	"github.com/edmartt/grpc-test/internal/utils"
 )
 
 func CreatePerson(person *pb.Person) (string, error) {
 	connection, err := grpcConnector()
 
+	zlog := utils.NewZeroLoggerAdapter()
+
 	if err != nil {
+		zlog.Error(err.Error())
 		return "", err
 	}
 	serviceClient := pb.NewPersonServiceClient(connection)
@@ -23,6 +26,7 @@ func CreatePerson(person *pb.Person) (string, error) {
 	})
 
 	if err != nil {
+		zlog.Error(err.Error())
 		return "", err
 	}
 
@@ -35,21 +39,21 @@ func CreatePerson(person *pb.Person) (string, error) {
 func ReadPerson(request *pb.GetPersonRequest) (*pb.GetPersonResponse, error) {
 	connection, err := grpcConnector()
 
+	zlog := utils.NewZeroLoggerAdapter()
+
 	if err != nil {
+		zlog.Error(err.Error())
 		return nil, err
 	}
-	log.Println("after grpc connection")
 
 	serviceClient := pb.NewPersonServiceClient(connection)
 
 	serverResponse, err := serviceClient.Get(context.Background(), request)
 
 	if err != nil {
-		log.Println("error service log: ", err.Error())
+		zlog.Error(err.Error())
 		return nil, err
 	}
-
-	log.Println("after grpc service response")
 
 	return serverResponse, nil
 }
@@ -57,7 +61,10 @@ func ReadPerson(request *pb.GetPersonRequest) (*pb.GetPersonResponse, error) {
 func DeletePerson(request *pb.DeletePersonRequest) (*pb.DeletePersonResponse, error) {
 	connection, err := grpcConnector()
 
+	zlog := utils.NewZeroLoggerAdapter()
+
 	if err != nil {
+		zlog.Error(err.Error())
 		return nil, err
 	}
 
@@ -66,6 +73,7 @@ func DeletePerson(request *pb.DeletePersonRequest) (*pb.DeletePersonResponse, er
 	serverResponse, err := serviceClient.Delete(context.Background(), request)
 
 	if err != nil {
+		zlog.Error(err.Error())
 		return nil, err
 	}
 

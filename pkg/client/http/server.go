@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	_ "github.com/edmartt/grpc-test/docs"
+	"github.com/edmartt/grpc-test/internal/utils"
 )
 
 func setRouter() *gin.Engine {
@@ -16,5 +17,10 @@ func setRouter() *gin.Engine {
 
 func Start(port string) {
 	router := setRouter()
-	router.Run(":" + port)
+	zlog := utils.NewZeroLoggerAdapter()
+	err := router.Run(":" + port)
+
+	if err != nil {
+		zlog.Error(err.Error())
+	}
 }

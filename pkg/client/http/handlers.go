@@ -1,7 +1,6 @@
 package http
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/edmartt/grpc-test/internal/person/models"
@@ -36,7 +35,6 @@ func getPerson(context *gin.Context) {
 		Response: "ID empty",
 	}
 
-	log.Println("before checking json for <BR")
 	if id == "" {
 		context.JSON(http.StatusBadRequest, badReq)
 		return
@@ -48,13 +46,10 @@ func getPerson(context *gin.Context) {
 
 	response, err := client.ReadPerson(requestPB)
 
-	log.Println("before checking json for 500")
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, err)
 		return
 	}
-
-	log.Println("after checking json for 500")
 
 	if response.Person.Id == "" {
 		context.JSON(http.StatusNotFound, httpResponse{
